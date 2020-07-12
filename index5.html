@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- video API事件 -->
+    <video id="video" src="data/imooc.mp4" controls height="400"></video>
+    <!-- <div id="volumeNode">随机音量</div> -->
+    <!-- <input type="button" value="全屏" id="fullscreen" /> -->
+    <input type="button" value="刷新视频播放器" id="reloadNode" />
+
+    <script>
+      // 选中video 标签
+      var $video = document.getElementById("video");
+
+      // timeupdate
+      /* $video.addEventListener("timeupdate", function () {
+        // console.log("视频正在播放");
+        let allTime =
+          parseInt($video.duration / 60) + ":" + parseInt($video.duration % 60);
+        let nowTime =
+          parseInt($video.currentTime / 60) +
+          ":" +
+          parseInt($video.currentTime % 60);
+        timeNode.innerHTML = nowTime + "/" + allTime;
+      }); */
+
+      // seeked  seeking
+      /* var seekedNum = 0,
+        seekingNum = 0;
+      $video.onseeked = function () {
+        // console.log("seeked...");
+        seekedNum++;
+      };
+      $video.onseeking = function () {
+        // console.log("seeking..."); // 触发频率高
+        seekingNum++;
+      };
+
+      setInterval(function () {
+        console.log(seekedNum);
+        console.log(seekingNum);
+      }, 3000); */
+
+      // volumechange
+      /* $video.onvolumechange = function () {
+        console.log(1);
+      };
+      volumeNode.onclick = function () {
+        $video.volume = Math.random();
+      }; */
+
+      // requestFullscreen 全屏 必须在用户的事件中调用
+      // $video.webkitrequestFullscreen();
+      /* var fullscreen = document.getElementById("fullscreen");
+      fullscreen.onclick = function () {
+        // $video.webkitRequestFullscreen();  // chrome
+        // $video.mozRequestFullScreen(); // 火狐
+
+        // 兼容
+        if ($video.webkitRequestFullscreen) {
+          $video.webkitRequestFullscreen();
+        } else if ($video.mozRequestFullScreen) {
+          $video.mozRequestFullScreen();
+        } else {
+          // ie
+          $video.msRequestFullscreen();
+        }
+      }; */
+
+      // load 刷新播放器的事件
+      reloadNode.onclick = function () {
+        $video.src = "data/imooc.ogv";
+        $video.load();
+      };
+
+      // canplay 视频已经准备好播放了
+      $video.addEventListener("canplay", function () {
+        console.log("视频可以播放了");
+      });
+    </script>
+  </body>
+</html>

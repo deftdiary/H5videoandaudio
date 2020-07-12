@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .outerNode {
+        width: 540px;
+        height: 332px;
+        box-shadow: 0 0 4px #5b606d;
+        /* border-radius: 3px; */
+        /* overflow: hidden; */
+      }
+      .outerNode .videoNode {
+        width: 540px;
+        height: 305px;
+        float: left;
+        background-color: black;
+      }
+      .outerNode .controlsNode {
+        width: 540px;
+        height: 27px;
+        float: left;
+        background: url(images/ctrs_bg.gif) repeat-x;
+      }
+      .outerNode .controlsNode .playNode {
+        float: left;
+        width: 15px;
+        height: 17px;
+        margin: 6px 0 0 14px;
+        background: url(images/playNode.png) no-repeat;
+        cursor: pointer;
+      }
+      .outerNode .controlsNode .pauseNode {
+        float: left;
+        width: 15px;
+        height: 17px;
+        margin: 6px 0 0 14px;
+        background: url(images/pause.png) no-repeat;
+        cursor: pointer;
+      }
+      .loadNode {
+        width: 267px;
+        height: 10px;
+        margin: 9px 0 0 14px;
+        float: left;
+        background: url(images/load_bg.png) repeat-x;
+        position: relative;
+      }
+      .loadNode .lineNode {
+        width: 0%;
+        height: 7px;
+        position: absolute;
+        left: 0;
+        top: 1px;
+        background: url(images/line_bg.png) repeat-x;
+        z-index: 10;
+      }
+      .loadNode .lineNode .lineRight {
+        position: absolute;
+        right: 0px;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background: url(images/line_r_bg.png) no-repeat;
+      }
+      .loadNode .loadLeft {
+        height: 100%;
+        width: 3px;
+        position: absolute;
+        left: -3px;
+        top: 0;
+        background: url(images/left_bg.png) no-repeat;
+        z-index: 15;
+      }
+      .loadNode .loadRight {
+        height: 100%;
+        width: 3px;
+        position: absolute;
+        right: 0px;
+        top: 0;
+        background: url(images/right_bg.png) no-repeat;
+        z-index: 15;
+      }
+      .loadNode .crlNode {
+        width: 17px;
+        height: 17px;
+        background: url(images/crl_bg.png)no-repeat center;
+        position: absolute;
+        left: -7.5px;
+        top: -3px;
+        cursor: pointer;
+        z-index: 20;
+      }
+      .timeNode {
+        float: left;
+        width: 80px;
+        height: 10px;
+        margin: 9px 0 0 9px;
+      }
+      .timeNode span {
+        color: #fff;
+        font-size: 10px;
+        float: left;
+        line-height: 10px;
+      }
+      .volumeNode {
+        width: 17px;
+        height: 16px;
+        background: url(images/volume_bg.png) no-repeat;
+        margin: 5px 0 0 16px;
+        float: left;
+      }
+      .volumeLine {
+        position: relative;
+        width: 61px;
+        height: 8px;
+        float: left;
+        margin: 10px 0 0 4px;
+        background: url(images/volumeLine_bg.png) repeat-x;
+      }
+      .volumeLine .v_left {
+        position: absolute;
+        background: url(images/v_left.png) no-repeat;
+        width: 3px;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+      .volumeLine .v_right {
+        position: absolute;
+        background: url(images/v_right.png) no-repeat;
+        width: 3px;
+        height: 100%;
+        top: 0;
+        right: 0;
+      }
+      .v_DragNode {
+        width: 15px;
+        height: 13px;
+        background: url(images/vo_d.png) no-repeat;
+        position: absolute;
+        left: 58.5px;
+        top: -3.5px;
+        cursor: pointer;
+      }
+      .fullNode {
+        float: left;
+        margin: 6px 0 0 23px;
+        width: 15px;
+        height: 17px;
+        background: url(images/full_bg.png) no-repeat;
+        cursor: pointer;
+      }
+      .fullNode:hover {
+        background: url(images/full_hover_bg.png) 1px 0px no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 最外层的元素 -->
+    <div class="outerNode">
+      <!-- video元素 -->
+      <video
+        class="videoNode"
+        src="data/imooc.mp4"
+        poster="data/poster.jpg"
+      ></video>
+      <!-- 控制器的元素 -->
+      <div class="controlsNode">
+        <!-- 控制播放暂停的按钮 -->
+        <div class="playNode"></div>
+        <!-- video的进度条 -->
+        <div class="loadNode">
+          <div class="loadLeft"></div>
+          <div class="loadRight"></div>
+          <!-- 进度条的按钮 -->
+          <div class="crlNode"></div>
+          <!-- 真正的进度条 -->
+          <div class="lineNode">
+            <div class="lineRight"></div>
+          </div>
+        </div>
+        <!-- 时间的元素 -->
+        <div class="timeNode">
+          <span class="now">00:00</span>
+          <span>-</span>
+          <span class="all">00:00</span>
+        </div>
+        <!--  声音的标志 -->
+        <div class="volumeNode"></div>
+        <!-- 声音的进度条 -->
+        <div class="volumeLine">
+          <div class="v_left"></div>
+          <div class="v_right"></div>
+          <div class="v_DragNode"></div>
+        </div>
+        <!-- 全屏按键 -->
+        <div class="fullNode"></div>
+      </div>
+    </div>
+
+    <script>
+      var PlayNode = document.getElementsByClassName("playNode")[0];
+      var PlayBln = true;
+      var VideoNode = document.querySelector(".videoNode");
+      var FullNode = document.querySelector(".fullNode");
+      var nowNode = document.querySelector(".now");
+      var allNode = document.querySelector(".all");
+      var LineNode = document.querySelector(".lineNode");
+      var CrlNode = document.querySelector(".crlNode");
+      var LoadNode = document.querySelector(".loadNode");
+      var VDragNode = document.querySelector(".v_DragNode");
+      // 播放暂停的控制
+      PlayNode.onclick = function () {
+        // this.classList.toggle('pauseNode')  // ES6方法
+        // 传统的通过布尔值改变classnaem的方法
+        PlayBln = !PlayBln;
+        if (PlayBln == false) {
+          this.className = "pauseNode";
+          VideoNode.play();
+        } else {
+          this.className = "playNode";
+          VideoNode.pause();
+        }
+      };
+
+      // 全屏按钮的事件
+      FullNode.onclick = function () {
+        if (VideoNode.webkitRequestFullscreen) {
+          VideoNode.webkitRequestFullscreen();
+        } else if (VideoNode.mozRequestFullScreen) {
+          VideoNode.mozRequestFullScreen();
+        } else if (VideoNode.msRequestFullscreen) {
+          VideoNode.msRequestFullscreen();
+        } else {
+          VideoNode.requestFullscreen();
+        }
+      };
+
+      // 视频时间
+      // setTimeout(function(){
+      //   allNode.innerHTML = VideoNode.duration;
+      // })
+      VideoNode.addEventListener(
+        "canplay",
+        function () {
+          // 解决NaN问题
+          var needTime = parseInt(VideoNode.duration);
+          var s = needTime % 60;
+          var m = parseInt(needTime / 60);
+          var timeNum = toDou(m) + ":" + toDou(s);
+          allNode.innerHTML = timeNum;
+        },
+        false
+      );
+      function toDou(time) {
+        // 解决不足10的问题
+        return time < 10 ? "0" + time : time;
+      }
+      // 当视频播放的时候 需要当前的时间动起来
+      VideoNode.addEventListener(
+        "timeupdate",
+        function () {
+          // 看一下目前的百分比进度
+          // console.log((VideoNode.currentTime / VideoNode.duration) * 100);
+          LineNode.style.width =
+            (VideoNode.currentTime / VideoNode.duration) * 100 + "%";
+          CrlNode.style.left = LineNode.offsetWidth - 8.5 + "px";
+          var needTime = parseInt(VideoNode.currentTime);
+          var s = needTime % 60;
+          var m = parseInt(needTime / 60);
+          var timeNum = toDou(m) + ":" + toDou(s);
+          nowNode.innerHTML = timeNum;
+        },
+        false
+      );
+
+      // 拖拽进度条按钮
+      CrlNode.onmousedown = function (e) {
+        var ev = e || event;
+        var l = ev.clientX - this.offsetLeft;
+        VideoNode.pause();
+        document.onmousemove = function (e) {
+          var ev = e || event;
+          var needX = ev.clientX - l;
+          var maxX = LoadNode.offsetWidth - 8.5;
+
+          needX = needX < -8.5 ? -8.5 : needX;
+          needX = needX > maxX ? maxX : needX;
+          CrlNode.style.left = needX + "px";
+          LineNode.style.width =
+            ((CrlNode.offsetLeft + 8) / LoadNode.offsetWidth) * 100 + "%";
+        };
+        document.onmouseup = function () {
+          document.onmousemove = document.onmouseup = null;
+          // console.log((CrlNode.offsetLeft + 8) / LoadNode.offsetWidth)
+          VideoNode.currentTime =
+            (VideoNode.duration * (CrlNode.offsetLeft + 8)) /
+            LoadNode.offsetWidth;
+          if (PlayBln == false) {
+            PlayNode.className = "pauseNode";
+            VideoNode.play();
+          } else {
+            PlayNode.className = "playNode";
+            VideoNode.pause();
+          }
+        };
+        return false;
+      };
+
+      // 音量的拖拽
+      VDragNode.onmousedown = function (e) {
+        var ev = e || event;
+        var l = ev.clientX - this.offsetLeft;
+        document.onmousemove = function (e) {
+          var ev = e || event;
+          var needX = ev.clientX - l;
+          var maxX = VDragNode.parentNode.offsetWidth - 2.5;
+
+          needX = needX < -2.5 ? -2.5 : needX;
+          needX = needX > maxX ? maxX : needX;
+
+          var lastVolume = (VDragNode.offsetLeft + 2) / VDragNode.parentNode.offsetWidth;
+          VDragNode.style.left = needX + "px";
+          VideoNode.volume = lastVolume < 0 ? 0 : lastVolume;
+        };
+        document.onmouseup = function () {
+          document.onmousemove = document.onmouseup = null;
+        };
+        return false;
+      };
+    </script>
+  </body>
+</html>

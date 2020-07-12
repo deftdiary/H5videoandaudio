@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- video API事件 -->
+    <video id="video" src="data/imooc.mp4" controls height="400"></video>
+    <div id="loopNode">不循环</div>
+    <script>
+      // 选中video 标签
+      var $video = document.getElementById("video");
+      // 查看目前视频状态
+      // console.log($video.networkState); // 3
+      // setTimeout(function(){
+      //     console.log($video.networkState) // 1
+      // })
+      // networkState
+      // 0 = NETWORK_EMPTY - 音频/视频尚未初始化
+      // 1 = NETWORK_IDLE - 音频/视频是活动的且已选取资源，但并未使用网络
+      // 2 = NETWORK_LOADING - 浏览器正在下载数据
+      // 3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
+
+      // currentSrc 返回当前音视频的URLcurrentSrc
+      // 返回音视频的地址（必须是加载好了可以播放的时候，不能赋值，只能获取地址）
+      // console.log($video.src)
+      // console.log("src = " + $video.src);
+      // setTimeout(function () {
+      //   console.log("currentSrc =" + $video.currentSrc);
+      // }, 100);
+
+      // $video.ended 返回布尔值 ended - 可以返回视频是否播放结束的结果；如果播放结束返回true，否则就返回false；可以进行事件监听（addEventListener），可以监听到视频播放结束，如果结束了可以在函数中进行一些操作。
+
+      // $video.addEventListener("ended", function () {
+      //   console.log("视频播放结束了");
+      // });
+      // $video.addEventListener("ended", function () {
+      //   // 可以设置循环播放
+      //   $video.play();
+      // });
+
+      // loop
+      // $video.loop = true;    // var `$loopNode = document.getElementById("loopNode")
+      // console.log($video.loop);
+      // loopNode.onclick = function () {  // id可以直接获取
+      //   if ($video.loop == false) {
+      //     this.innerHTML = "循环";
+      //    $video.loop = true;
+      //   }else{
+      //    this.innerHTML = '不循环';
+      //    $video.loop = false;
+      //  }
+      // };
+
+      // $video.playbackRate
+      // $video.playbackRate = 2  // 二倍速
+      // $video.playbackRate = 0.5  // 0.5倍速
+      // console.log($video.playbackRate);
+
+      // readyState 返回视频当前的状态
+      setTimeout(function () {
+        console.log($video.readyState);
+      }, 500);
+    </script>
+  </body>
+</html>

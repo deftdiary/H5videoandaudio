@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- video API事件 -->
+    <video src="" id="video"></video>
+    <input type="range" name="" min="0" max="100" value="50" id="range" />
+    <div id="play">开始</div>
+    <div id="stop">暂停</div>
+    <div id="go">快进</div>
+    <script>
+      // 选中video 标签
+      var $video = document.getElementById("video");
+      var $stop = document.getElementById("stop");
+      var $play = document.getElementById("play");
+      var $go = document.getElementById("go");
+      var $range = document.getElementById("range");
+
+      //   window.onclick = function () {
+      //     $video.play();
+      //   };
+      //   $video.play();
+      $stop.onclick = function () {
+        $video.pause();
+      };
+      $play.onclick = function () {
+        $video.play();
+      };
+
+      //  duration
+      /* //  console.log($video.duration)
+      var min = parseInt($video.duration/60)
+      var sec = parseInt($video.duration%60)
+      console.log(min+ ':'+ sec)   // XXXXXXX
+      setTimeout(function(){
+          var min = parseInt($video.duration/60)
+          var sec = parseInt($video.duration%60)
+          console.log(min+ ':'+ sec)   // 获取视频长度
+      }, 100) */
+
+      // currentTime
+      setInterval(function () {
+        console.log($video.currentTime);
+      }, 1000);
+      // 设置视频时间在30s
+      $video.currentTime = 30; // 重要@!!!!
+
+      // 快进
+      $go.onclick = function () {
+        $video.currentTime += 3;
+      };
+
+      // src
+      $video.src = "data/imooc.mp4";
+
+      // volume
+      //   $video.volume = 0.5;
+      //   console.log('音量:'+$video.volume)
+
+      $range.oninput = function () {
+        $video.volume = this.value / 100;
+      };
+
+      // 设置controls控件
+      $video.controls = true;
+
+      // muted
+      // $video.muted = true;
+    </script>
+  </body>
+</html>

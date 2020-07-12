@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      audio {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- audio API -->
+    <!-- <audio controls autoplay loop>
+        <source src="data/imooc.mp3">
+        <source src="data/imooc.ogg"> 
+        <source src="data/imooc.wav">
+    </audio> -->
+
+    <button id="$play">play</button>
+    <button id="$pause">pause</button>
+    <div id="currentTime"></div>
+    <div id="allTime"></div>
+    <div id="volume">音量</div>
+    <script>
+      // console.log(new Audio())
+
+      var myAudio = new Audio();
+      myAudio.src = "data/imooc.wav";
+      // myAudio.play();
+      $play.onclick = function () {
+        myAudio.play();
+      };
+      $pause.onclick = function () {
+        myAudio.pause();
+      };
+      // setTimeout(function () {
+      //   allTime.innerHTML = myAudio.duration;
+      // }, 100);
+      myAudio.addEventListener('canplay',function(){
+        allTime.innerHTML = myAudio.duration;
+      })
+      setInterval(() => {
+        currentTime.innerHTML = myAudio.currentTime;
+      }, 300);
+      volume.onclick = () => {
+        let v =prompt('输入0-1数字')
+        myAudio.volume = v;
+        // console.log(myAudio.networkState)
+        console.log(myAudio.src)
+        console.log(myAudio.currentSrc)
+      }
+      myAudio.addEventListener('ended',()=> {
+        console.log('音频播放完成')
+      })
+
+      // loop
+      myAudio.loop = true;
+
+      // playbackRate
+      console.log(myAudio.playbackRate) // 1倍速
+      
+      // timeupdate
+      myAudio.addEventListener('timeupdate',()=>{
+        console.log('timeupdate...')
+      })
+    </script>
+  </body>
+</html>

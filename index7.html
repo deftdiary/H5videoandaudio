@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      audio {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- audio API -->
+    <audio id="myAudio" controls autoplay loop>
+        <source src="data/imooc.mp3">
+        <source src="data/imooc.ogg"> 
+        <source src="data/imooc.wav">
+    </audio>
+    <button id="ab">seeke 与 seeking触发比较</button> <!-- 差别不是特别大 -->
+    <button id="btn">全屏</button>
+    <button id="loadBtn">重新加载</button>
+    <script>
+      let a = 0 , b = 0;
+      // seeked seeking 
+      myAudio.addEventListener('seeked',()=>{
+        console.log('seeked...')
+        a++;
+      })
+      myAudio.addEventListener('seeking',()=>{
+        console.log('seeking...')
+        b++;
+      })
+
+      // volumechange
+      myAudio.addEventListener('volumechange', ()=>{
+        console.log('volumechange')
+      })
+      ab.onclick = ()=>{
+        console.log(a, b);
+      }
+
+      // 全屏
+      btn.onclick = ()=>{
+        myAudio.webkitRequestFullScreen();
+      }
+
+      // 重新加载
+      loadBtn.onclick = () => {
+        myAudio.load();
+      }
+      
+      
+    </script>
+  </body>
+</html>

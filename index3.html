@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- video API事件 -->
+    <video id="video" src="data/imooc.mp4" controls height="400"></video>
+    <div id="timeNode"></div>
+    <script>
+      // 选中video 标签
+      var $video = document.getElementById("video");
+
+      // timeupdate
+      $video.addEventListener("timeupdate", function () {
+        // console.log("视频正在播放");
+        let allTime =
+          parseInt($video.duration / 60) + ":" + parseInt($video.duration % 60);
+        let nowTime =
+          parseInt($video.currentTime / 60) +
+          ":" +
+          parseInt($video.currentTime % 60);
+        timeNode.innerHTML = nowTime + "/" + allTime;
+      });
+    </script>
+  </body>
+</html>
